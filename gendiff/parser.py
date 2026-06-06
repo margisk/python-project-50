@@ -6,6 +6,7 @@ def build_diff_item(key, status, old_value, new_value=None):
         "new_value": new_value
     }
 
+
 def generate_diff(obj1: dict, obj2: dict) -> str:
     # determining key groups with sets
     keys_set1 = set(obj1.keys())
@@ -14,7 +15,7 @@ def generate_diff(obj1: dict, obj2: dict) -> str:
     set1_complement = keys_set1 - keys_set2
     set2_complement = keys_set2 - keys_set1
 
-    ## create an inner function to avoid passing objects back and forth
+    # create an inner function to avoid passing objects back and forth
     def get_key_content(key):
         if key in set1_complement:
             return (key, "removed", obj1[key], None)
@@ -62,5 +63,3 @@ def generate_str_view(diff_obj) -> str:
     
     formatted_result = '\n'.join(result)
     return '{\n' + formatted_result + '\n}'
-
-                
