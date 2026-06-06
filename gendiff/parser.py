@@ -43,18 +43,21 @@ def generate_str_view(diff_obj) -> str:
     indent = '  '
     for item in diff_obj:
         item_string = ''
-        old_value_template = f'{indent}- {item["key"]}: {item["old_value"]}'
-        new_value_template = f'{indent}+ {item["key"]}: {item["new_value"]}'
+        old_value_template = f'{item["key"]}: {item["old_value"]}'
+        new_value_template = f'{item["key"]}: {item["new_value"]}'
 
         # still can be simplified
         if item["status"] == "changed":
-            item_string = old_value_template + '\n' + new_value_template
+            item_string = (
+                f"{indent}- {old_value_template}\n"
+                f"{indent}+ {new_value_template}"
+            )
         elif item["status"] == "added":
-            item_string = new_value_template
+            item_string = f"{indent}+ {new_value_template}"
         elif item["status"] == "unchanged":
-            item_string = f'{indent}  {item["key"]}: {item["old_value"]}'
+            item_string = f"{indent}  {old_value_template}"
         elif item["status"] == "removed":
-            item_string = old_value_template
+            item_string = f"{indent}- {old_value_template}"
         result.append(item_string)
     
     formatted_result = '\n'.join(result)
