@@ -24,3 +24,7 @@ jobs:
       - name: Test coverage
         run: |
           uv run pytest --cov=gendiff --cov-report xml
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v7
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
