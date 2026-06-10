@@ -3,7 +3,7 @@ def build_diff_item(key, status, old_value, new_value=None):
         "key": key,
         "status": status,
         "old_value": str(old_value).lower(),
-        "new_value": str(new_value).lower()
+        "new_value": str(new_value).lower(),
     }
 
 
@@ -32,21 +32,23 @@ def generate_diff(obj1: dict, obj2: dict) -> str:
     diff = []
     for item in content:
         key, status, old_value, new_value = item
-        # str is quick workaround
         diff.append(build_diff_item(key, status, old_value, new_value))
-    
+
     string_view = generate_str_view(diff)
     return string_view
 
 
 def generate_str_view(diff_obj) -> str:
+    if not diff_obj:
+        return "{}"
+
     result = []
     # two spaces
-    indent = '  '
+    indent = "  "
     for item in diff_obj:
-        item_string = ''
-        old_value_template = f'{item["key"]}: {item["old_value"]}'
-        new_value_template = f'{item["key"]}: {item["new_value"]}'
+        item_string = ""
+        old_value_template = f"{item['key']}: {item['old_value']}"
+        new_value_template = f"{item['key']}: {item['new_value']}"
 
         # still can be simplified
         if item["status"] == "changed":
@@ -61,6 +63,6 @@ def generate_str_view(diff_obj) -> str:
         elif item["status"] == "removed":
             item_string = f"{indent}- {old_value_template}"
         result.append(item_string)
-    
-    formatted_result = '\n'.join(result)
-    return '{\n' + formatted_result + '\n}'
+
+    formatted_result = "\n".join(result)
+    return "{\n" + formatted_result + "\n}"

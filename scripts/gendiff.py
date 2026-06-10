@@ -30,6 +30,7 @@ def main():
     diff = generate_diff(obj1, obj2)
     print(diff)
 
+
 if __name__ == "__main__":
     main()
     
