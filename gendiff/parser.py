@@ -2,8 +2,8 @@ def build_diff_item(key, status, old_value, new_value=None):
     return {
         "key": key,
         "status": status,
-        "old_value": old_value,
-        "new_value": new_value
+        "old_value": str(old_value).lower(),
+        "new_value": str(new_value).lower()
     }
 
 
@@ -32,6 +32,7 @@ def generate_diff(obj1: dict, obj2: dict) -> str:
     diff = []
     for item in content:
         key, status, old_value, new_value = item
+        # str is quick workaround
         diff.append(build_diff_item(key, status, old_value, new_value))
     
     string_view = generate_str_view(diff)
