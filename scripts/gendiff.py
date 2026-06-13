@@ -1,5 +1,4 @@
 import argparse
-import json
 from pathlib import Path
 
 from gendiff import generate_diff, parse_files
