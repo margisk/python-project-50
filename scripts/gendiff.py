@@ -2,7 +2,7 @@ import argparse
 import json
 from pathlib import Path
 
-from gendiff import generate_diff
+from gendiff import generate_diff, parse_files
 
 
 def parse_arguments():
@@ -22,12 +22,8 @@ def main():
     args = parse_arguments()
     path1 = Path(args.first_file)
     path2 = Path(args.second_file)
-    with open(path1, "r") as file1:
-        obj1 = json.load(file1)
-    with open(path2, "r") as file2:
-        obj2 = json.load(file2)
-
-    diff = generate_diff(obj1, obj2)
+    file_objects = parse_files(path1, path2)
+    diff = generate_diff(file_objects[0], file_objects[1])
     print(diff)
 
 

@@ -3,7 +3,7 @@ def build_diff_item(key, status, old_value, new_value=None):
         "key": key,
         "status": status,
         "old_value": str(old_value).lower(),
-        "new_value": str(new_value).lower(),
+        "new_value": str(new_value).lower()
     }
 
 
